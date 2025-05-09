@@ -14,11 +14,10 @@ import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
-  DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { LayoutList, User, Users } from "lucide-react";
+import { LayoutList, Users } from "lucide-react";
 import { useRouter, useSearchParams } from "next/navigation";
 import EndCallButton from "./EndCallButton";
 import Loader from "./Loader";
