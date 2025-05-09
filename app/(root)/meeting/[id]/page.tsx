@@ -8,22 +8,33 @@ import { useUser } from '@clerk/nextjs'
 import { StreamCall, StreamTheme } from '@stream-io/video-react-sdk';
 import React, { useState } from 'react'
 
-const Meeting = ({params : { id }}: { params: { id: string } }) => {
-  const { isLoaded} = useUser();
-  const [isSetupComplete , setIsSetupComplete] = useState(false)
-  const { call , isCallLoading } = useGetCallById(id);
+type Props = {
+  params: {
+    id: string;
+  };
+};
 
-  if(!isLoaded || isCallLoading) return <Loader />
+const Meeting = (props: Props) => {
+  const id = props.params.id;
+  const { isLoaded } = useUser();
+  const [isSetupComplete, setIsSetupComplete] = useState(false);
+  const { call, isCallLoading } = useGetCallById(id);
+
+  if (!isLoaded || isCallLoading) return <Loader />;
 
   return (
     <main className='h-screen w-full'>
-      <StreamCall call={ call }>
+      <StreamCall call={call}>
         <StreamTheme>
-          {!isSetupComplete ? (<MeetingSetup setIsSetupComplete = {setIsSetupComplete} />) : (<MeetingRoom />)}
+          {!isSetupComplete ? (
+            <MeetingSetup setIsSetupComplete={setIsSetupComplete} />
+          ) : (
+            <MeetingRoom />
+          )}
         </StreamTheme>
       </StreamCall>
     </main>
-  )
-}
+  );
+};
 
-export default Meeting
+export default Meeting;
